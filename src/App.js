@@ -1,11 +1,17 @@
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
+	const handleNameChange = () => {
+		const names = ['Bob', 'Kevin', 'Dave']
+		const int = Math.floor(Math.random() * 3)
 
-    </div>
-  );
+		return names[int]
+	}
+	return (
+		<div className="App">
+			Hello {handleNameChange()}!
+		</div>
+	);
 }
 
 export default App;
