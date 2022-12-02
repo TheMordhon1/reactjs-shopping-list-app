@@ -3,8 +3,7 @@ import { RiDeleteBin5Fill } from 'react-icons/ri'
 
 const ListItem = ({ item, handleOnCheck, handleOnDelete, setProgress, progress }) => {
 	return (
-		<div
-			key={item.id}
+		<li
 			className="list">
 			<div className="left">
 				<input
@@ -44,7 +43,7 @@ const ListItem = ({ item, handleOnCheck, handleOnDelete, setProgress, progress }
 					}
 				}}
 			/>
-		</div>
+		</li>
 	)
 }
 

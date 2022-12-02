@@ -26,6 +26,16 @@ function App() {
 			isChecked: false,
 			item: "my item 4"
 		},
+		{
+			id: 5,
+			isChecked: false,
+			item: "my item 5"
+		},
+		{
+			id: 6,
+			isChecked: false,
+			item: "my item 6"
+		},
 	])
 
 	const handleOnCheck = (id) => {
