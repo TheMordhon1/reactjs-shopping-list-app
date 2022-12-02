@@ -1,15 +1,20 @@
 import React from 'react'
+import LineItems from './LineItems'
 
-const Content = () => {
-	const handleNameChange = () => {
-		const names = ['Bob', 'Kevin', 'Dave']
-		const int = Math.floor(Math.random() * 3)
 
-		return names[int]
-	}
+const Content = ({ items, progress, setProgress, handleOnCheck, handleOnDelete }) => {
+
 	return (
 		<main>
-			{handleNameChange()}
+			{items.length > 0 ?
+				<LineItems
+					items={items}
+					progress={progress}
+					setProgress={setProgress}
+					handleOnCheck={handleOnCheck}
+					handleOnDelete={handleOnDelete}
+				/> : <p>Item is empty</p>
+			}
 		</main>
 	)
 }
