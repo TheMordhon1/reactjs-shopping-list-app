@@ -17,6 +17,54 @@ code {
     monospace;
 }
 
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.addForm {
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px;
+}
+
+.addForm label {
+  position: absolute;
+  display: none;
+}
+
+.addForm input[type="text"] {
+  flex-grow: 1;
+  max-width: calc(100% - 50px);
+  min-height: 48px;
+  font-size: 1rem;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  margin-right: 0.25rem;
+  outline: none;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: aliceblue;
+  color: mediumblue;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus {
+  background-color: green;
+  color: white;
+}
+
 .list {
   display: flex;
   justify-content: space-between;

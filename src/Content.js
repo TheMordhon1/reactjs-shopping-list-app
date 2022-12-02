@@ -6,7 +6,7 @@ import ProgressComp from './ProgressComp'
 const Content = ({ items, progress, setProgress, handleOnCheck, handleOnDelete }) => {
 
 	return (
-		<main>
+		<main style={{ flex: 1 }}>
 			{items.length > 0 ?
 				<div style={{ margin: '10px' }}>
 					<ProgressComp items={items} progress={progress} />
