@@ -1,20 +1,40 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import AddItem from './AddItem';
-import Content from './Content';
+import Content, { emptyStyle } from './Content';
 import Footer from './Footer';
 import Header from './Header';
 import SearchItem from './SearchItem';
 
 function App() {
-	const [progress, setProgress] = useState(0)
-	const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppingList')) || []);
-	const [newItem, setNewItem] = useState('')
-	const [search, setSearch] = useState('')
+	const API_URL = 'http://localhost:3500/itemsa';
+	const [progress, setProgress] = useState(0);
+	const [items, setItems] = useState([]);
+	const [newItem, setNewItem] = useState('');
+	const [search, setSearch] = useState('');
+	const [testError, setTestError] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		localStorage.setItem('shoppingList', JSON.stringify(items))
-	}, [items])
+		const fetchItems = async () => {
+			try {
+				const response = await fetch(API_URL);
+				if (!response.ok) throw Error('Did not receive expected data')
+				const listItems = await response.json();
+				console.log(listItems);
+				setItems(listItems);
+				setTestError(null);
+			} catch (err) {
+				// console.log(err.stack)
+				setTestError(err.message)
+			} finally {
+				setIsLoading(false);
+			}
+		}
+		setTimeout(() => {
+			(async () => await fetchItems())();
+		}, 2000);
+	}, [])
 
 	const addItem = (item) => {
 		const id = items.length ? items[items.length - 1].id + 1 : 1;
@@ -56,13 +76,19 @@ function App() {
 				search={search}
 				setSearch={setSearch}
 			/>
-			<Content
-				items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
-				progress={progress}
-				setProgress={setProgress}
-				handleOnCheck={handleOnCheck}
-				handleOnDelete={handleOnDelete}
-			/>
+			<>
+				{isLoading && <p style={emptyStyle}>Loading items...</p>}
+				{testError && <p style={emptyStyle}>{`Error: ${testError}`}</p>}
+				{!testError && !isLoading &&
+					<Content
+						items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
+						progress={progress}
+						setProgress={setProgress}
+						handleOnCheck={handleOnCheck}
+						handleOnDelete={handleOnDelete}
+					/>
+				}
+			</>
 			<Footer />
 		</div>
 	);
