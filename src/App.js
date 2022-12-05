@@ -12,7 +12,7 @@ function App() {
 	const [items, setItems] = useState([]);
 	const [newItem, setNewItem] = useState('');
 	const [search, setSearch] = useState('');
-	const [testError, setTestError] = useState(null);
+	const [fetchError, setFetchError] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
@@ -23,10 +23,9 @@ function App() {
 				const listItems = await response.json();
 				console.log(listItems);
 				setItems(listItems);
-				setTestError(null);
+				setFetchError(null);
 			} catch (err) {
-				// console.log(err.stack)
-				setTestError(err.message)
+				setFetchError(err.message)
 			} finally {
 				setIsLoading(false);
 			}
@@ -78,8 +77,8 @@ function App() {
 			/>
 			<>
 				{isLoading && <p style={emptyStyle}>Loading items...</p>}
-				{testError && <p style={emptyStyle}>{`Error: ${testError}`}</p>}
-				{!testError && !isLoading &&
+				{fetchError && <p style={emptyStyle}>{`Error: ${fetchError}`}</p>}
+				{!fetchError && !isLoading &&
 					<Content
 						items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
 						progress={progress}
