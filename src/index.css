@@ -23,9 +23,27 @@ code {
   min-height: 100vh;
 }
 
+.searchForm {
+  display: flex;
+  margin: 0 10px;
+}
+
+.searchForm label {
+  position: absolute;
+  display: none;
+}
+
+.searchForm input {
+  min-height: 48px;
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  outline: none;
+}
+
 .addForm {
   display: flex;
-  justify-content: flex-start;
   margin: 10px;
 }
 
