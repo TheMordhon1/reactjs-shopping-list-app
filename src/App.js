@@ -7,7 +7,7 @@ import Header from './Header';
 import SearchItem from './SearchItem';
 
 function App() {
-	const API_URL = 'http://localhost:3500/itemsa';
+	const API_URL = 'http://localhost:3500/items';
 	const [progress, setProgress] = useState(0);
 	const [items, setItems] = useState([]);
 	const [newItem, setNewItem] = useState('');
