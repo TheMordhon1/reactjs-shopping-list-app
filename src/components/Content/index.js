@@ -1,7 +1,6 @@
 import React from 'react'
 import EmptyState from '../EmptyState'
 import LineItems from './LineItems'
-import ProgressComp from './ProgressComp'
 
 export const emptyStyle = {
 	flex: 1,
@@ -9,16 +8,13 @@ export const emptyStyle = {
 	justifyContent: 'center',
 	alignItems: 'center',
 }
-const Content = ({ items, progress, setProgress, handleOnCheck, handleOnDelete }) => {
+const Content = ({ items, handleOnCheck, handleOnDelete }) => {
 	return (
 		<main style={items.length > 0 ? { flex: 1 } : emptyStyle}>
 			{items.length > 0 ?
 				<div style={{ margin: '10px' }}>
-					<ProgressComp items={items} progress={progress} />
 					<LineItems
 						items={items}
-						progress={progress}
-						setProgress={setProgress}
 						handleOnCheck={handleOnCheck}
 						handleOnDelete={handleOnDelete}
 					/>

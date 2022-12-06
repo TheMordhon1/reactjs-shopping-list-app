@@ -94,6 +94,12 @@ select option {
   font-size: 18px;
 }
 
+.total-items {
+  margin: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .list {
   display: flex;
   justify-content: space-between;

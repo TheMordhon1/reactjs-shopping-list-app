@@ -6,7 +6,6 @@ import Content, { emptyStyle } from './components/Content';
 
 function App() {
 	const API_URL = 'http://localhost:3500/items';
-	const [progress, setProgress] = useState(0);
 	const [items, setItems] = useState([]);
 	const [newItem, setNewItem] = useState('');
 	const [search, setSearch] = useState('');
@@ -115,6 +114,15 @@ function App() {
 				setFilter={handleFilter}
 			/>
 			<>
+				<p className='total-items'>Total Item:
+					{
+						filter === "all" ?
+							` ${items.length}`
+							: filter === "done" ? ` ${doneFilter.length}/${items.length}`
+								: ` ${undoneFilter.length}/${items.length}`
+					}
+
+				</p>
 				{isLoading && <p style={emptyStyle}>Loading items...</p>}
 				{fetchError && <p style={emptyStyle}>{`Error: ${fetchError}`}</p>}
 				{!fetchError && !isLoading &&
@@ -125,8 +133,6 @@ function App() {
 								: filter === "done" ? doneFilter
 									: undoneFilter
 						}
-						progress={progress}
-						setProgress={setProgress}
 						handleOnCheck={handleOnCheck}
 						handleOnDelete={handleOnDelete}
 					/>

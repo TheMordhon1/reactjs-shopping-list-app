@@ -1,7 +1,7 @@
 import React from 'react'
 import ListItem from './ListItem'
 
-const LineItems = ({ progress, items, handleOnCheck, handleOnDelete, setProgress }) => {
+const LineItems = ({ items, handleOnCheck, handleOnDelete }) => {
 	return (
 
 		<ul>
@@ -12,8 +12,6 @@ const LineItems = ({ progress, items, handleOnCheck, handleOnDelete, setProgress
 						item={item}
 						handleOnCheck={handleOnCheck}
 						handleOnDelete={handleOnDelete}
-						progress={progress}
-						setProgress={setProgress}
 					/>
 				)
 			})}
