@@ -114,28 +114,24 @@ function App() {
 				setFilter={handleFilter}
 			/>
 			<>
-				<p className='total-items'>Total Item:
-					{
-						filter === "all" ?
-							` ${items.length}`
-							: filter === "done" ? ` ${doneFilter.length}/${items.length}`
-								: ` ${undoneFilter.length}/${items.length}`
-					}
-
-				</p>
 				{isLoading && <p style={emptyStyle}>Loading items...</p>}
 				{fetchError && <p style={emptyStyle}>{`Error: ${fetchError}`}</p>}
 				{!fetchError && !isLoading &&
-					<Content
-						items={
-							filter === "all" ?
-								items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))
-								: filter === "done" ? doneFilter
-									: undoneFilter
-						}
-						handleOnCheck={handleOnCheck}
-						handleOnDelete={handleOnDelete}
-					/>
+					<>
+						{items.length > 0 && filter === "all" && <p className='total-items'>Total Item: {items.length}</p>}
+						{doneFilter.length > 0 && filter === "done" && <p className='total-items'>Total Item: {`${doneFilter.length}/${items.length}`} </p>}
+						{undoneFilter.length > 0 && filter === "undone" && <p className='total-items'>Total Item:  {`${undoneFilter.length}/${items.length}`}</p>}
+						<Content
+							items={
+								filter === "all" ? items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))
+									: filter === "done" ? doneFilter
+										: undoneFilter
+							}
+							handleOnCheck={handleOnCheck}
+							handleOnDelete={handleOnDelete}
+							emptyState={filter}
+						/>
+					</>
 				}
 			</>
 			<Footer />

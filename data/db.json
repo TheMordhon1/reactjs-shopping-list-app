@@ -3,27 +3,7 @@
     {
       "id": 1,
       "isChecked": true,
-      "item": "Pizza"
-    },
-    {
-      "id": 2,
-      "isChecked": false,
-      "item": "Milk"
-    },
-    {
-      "id": 3,
-      "isChecked": false,
       "item": "Cookies"
-    },
-    {
-      "id": 4,
-      "isChecked": false,
-      "item": "Candy"
-    },
-    {
-      "id": 5,
-      "isChecked": false,
-      "item": "Martabak"
     }
   ]
 }
