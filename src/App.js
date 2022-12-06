@@ -1,11 +1,8 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import AddItem from './AddItem';
-import Content, { emptyStyle } from './Content';
-import Footer from './Footer';
-import Header from './Header';
-import SearchItem from './SearchItem';
 import apiRequest from './api';
+import { AddItem, FilterItem, Footer, Header, SearchItem } from './components';
+import Content, { emptyStyle } from './components/Content';
 
 function App() {
 	const API_URL = 'http://localhost:3500/items';
@@ -13,6 +10,7 @@ function App() {
 	const [items, setItems] = useState([]);
 	const [newItem, setNewItem] = useState('');
 	const [search, setSearch] = useState('');
+	const [filter, setFilter] = useState('all')
 	const [fetchError, setFetchError] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -20,13 +18,12 @@ function App() {
 		const fetchItems = async () => {
 			try {
 				const response = await fetch(API_URL);
-				if (!response.ok) throw Error('Did not receive expected data')
+				if (!response.ok) throw Error('Did not receive expected data');
 				const listItems = await response.json();
-				console.log(listItems);
 				setItems(listItems);
 				setFetchError(null);
 			} catch (err) {
-				setFetchError(err.message)
+				setFetchError(err.message);
 			} finally {
 				setIsLoading(false);
 			}
@@ -93,6 +90,14 @@ function App() {
 		setNewItem('')
 	}
 
+	const doneFilter = items.filter(item => item.isChecked);
+	const undoneFilter = items.filter(item => !item.isChecked);
+	const handleFilter = (e) => {
+		e.preventDefault();
+		setFilter(e.target.value);
+
+	}
+
 	return (
 		<div className="App">
 			<Header />
@@ -105,12 +110,21 @@ function App() {
 				search={search}
 				setSearch={setSearch}
 			/>
+			<FilterItem
+				filter={filter}
+				setFilter={handleFilter}
+			/>
 			<>
 				{isLoading && <p style={emptyStyle}>Loading items...</p>}
 				{fetchError && <p style={emptyStyle}>{`Error: ${fetchError}`}</p>}
 				{!fetchError && !isLoading &&
 					<Content
-						items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
+						items={
+							filter === "all" ?
+								items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))
+								: filter === "done" ? doneFilter
+									: undoneFilter
+						}
 						progress={progress}
 						setProgress={setProgress}
 						handleOnCheck={handleOnCheck}

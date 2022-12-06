@@ -1,5 +1,6 @@
 import React from 'react'
-import EmptyIcon from './icon/no-results.png'
+import { emptyIc } from '../../icon'
+
 
 const emptyStyle = {
 	display: 'flex',
@@ -20,7 +21,7 @@ const textStyle = {
 const EmptyState = ({ text }) => {
 	return (
 		<div style={emptyStyle}>
-			<img width={100} height={100} src={EmptyIcon} alt="empty-icon" />
+			<img width={100} height={100} src={emptyIc} alt="empty-icon" />
 			<p style={textStyle}>{text}</p>
 		</div>
 	)
